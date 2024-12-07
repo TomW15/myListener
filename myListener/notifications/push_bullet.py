@@ -7,7 +7,7 @@ SECTION: str = "pushbullet"
 KEY: str = "api_key"
 
 
-def send(title: str, body: str, nickname: str = None, chat: str = None) -> None:
+def send(title: str, body: str, nickname: str = None, channel_tag: str = None) -> None:
 
     def get_api_key() -> str:
         try:
@@ -29,7 +29,7 @@ def send(title: str, body: str, nickname: str = None, chat: str = None) -> None:
         title=title,
         body=body,
         device=None if nickname is None else pb.get_device(nickname=nickname),
-        chat=chat,
+        channel=None if channel_tag is None else pb.get_channel(channel_tag=channel_tag),
     )
 
     return
@@ -41,6 +41,7 @@ def main():
         title="Test",
         body="Testing sending a notification",
         nickname="pixel",
+        channel_tag="trade_updates",
     )
 
     return
